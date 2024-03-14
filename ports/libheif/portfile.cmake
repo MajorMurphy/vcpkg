@@ -10,7 +10,8 @@ vcpkg_from_github(
 
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
 	FEATURES
-		hevc    WITH_X265
+		hevc		WITH_X265
+		sharpyuv	WITH_LIBSHARPYUV
 )
 
 vcpkg_cmake_configure(
