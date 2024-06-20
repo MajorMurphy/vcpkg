@@ -1,0 +1,17 @@
+vcpkg_from_github(
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO google/libultrahdr
+    REF 277808a7eeccc352b57a4fb76f5dbab160300a8d
+    SHA512 8cb6456ff6d0690a0da7ab595fd96a5c3203bba539f7e146e7b793b6e3566a25e1a7e243b354ee28a41278fbdb069c3a207f4efdc8ef4181ecb56fa534b386bc
+    HEAD_REF master
+)
+vcpkg_cmake_configure(
+    SOURCE_PATH "${SOURCE_PATH}"
+)
+
+vcpkg_cmake_build()
+
+file(INSTALL "${SOURCE_PATH}/ultrahdr_api.h" DESTINATION "${CURRENT_PACKAGES_DIR}/include" FILES_MATCHING PATTERN "*.h")
+file(INSTALL "${SOURCE_PATH}/lib/include" DESTINATION "${CURRENT_PACKAGES_DIR}" FILES_MATCHING PATTERN "*.h")
+file(INSTALL "${SOURCE_PATH}/README.md" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
+file(INSTALL "${SOURCE_PATH}/LICENSE" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
