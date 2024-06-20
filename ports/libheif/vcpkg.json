@@ -1,7 +1,7 @@
 {
   "name": "libheif",
   "version": "1.17.6",
-  "port-version": 1,
+  "port-version": 2,
   "description": "libheif is an HEIF and AVIF file format decoder and encoder.",
   "homepage": "http://www.libheif.org/",
   "license": "LGPL-3.0-only",
@@ -31,6 +31,30 @@
       "dependencies": [
         "x265"
       ]
+    },
+	"aom": {
+      "description": "AVIF decoding via libaom",
+      "license": "BSD-2-Clause",
+      "dependencies": [
+        "aom"
+      ]
+    },
+	"sharpyuv": {
+      "description": "sharpyuv via libwebp",
+      "license": "BSD-3-Clause",
+      "dependencies": [
+        "libwebp"
+      ]
+    },
+	"jpeg": {
+      "description": "jpeg via libjpeg-turbo",
+      "license": "BSD-3-Clause",
+      "dependencies": [
+        "libjpeg-turbo"
+      ]
+    },
+	"uncompressed": {
+      "description": "uncomressed codec"
     }
   }
 }

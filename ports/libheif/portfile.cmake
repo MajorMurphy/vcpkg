@@ -11,6 +11,10 @@ vcpkg_from_github(
 vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
 	FEATURES
 		hevc    WITH_X265
+		jpeg 	WITH_JPEG_DECODER
+		aom		WITH_AOM_DECODER
+		uncompressed WITH_UNCOMPRESSED_CODEC
+		sharpyuv DWITH_LIBSHARPYUV
 )
 
 vcpkg_cmake_configure(
