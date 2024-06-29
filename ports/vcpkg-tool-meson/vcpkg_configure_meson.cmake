@@ -42,7 +42,9 @@ function(z_vcpkg_meson_set_proglist_variables config_type)
                 list(FILTER ${prog}flags EXCLUDE REGEX "(-|/)nologo") # Breaks compiler detection otherwise
                 z_vcpkg_meson_convert_list_to_python_array(${prog}flags ${${prog}flags})
                 set("${var_to_set}" "${meson_${prog}} = ${${prog}flags}" PARENT_SCOPE)
-                if (DEFINED VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID AND NOT VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID MATCHES "^(GNU|Intel)$")
+                if (DEFINED VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID
+                    AND NOT VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID MATCHES "^(GNU|Intel)$"
+                    AND VCPKG_DETECTED_CMAKE_LINKER)
                     string(TOUPPER "MESON_${prog}_LD" var_to_set)
                     set(${var_to_set} "${meson_${prog}}_ld = ['${VCPKG_DETECTED_CMAKE_LINKER}']" PARENT_SCOPE)
                 endif()
@@ -56,7 +58,9 @@ function(z_vcpkg_meson_set_proglist_variables config_type)
                 z_vcpkg_meson_convert_list_to_python_array(${prog}flags ${${prog}flags})
                 string(TOLOWER "${prog}" proglower)
                 set("${var_to_set}" "${proglower} = ${${prog}flags}" PARENT_SCOPE)
-                if (DEFINED VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID AND NOT VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID MATCHES "^(GNU|Intel)$")
+                if (DEFINED VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID
+                    AND NOT VCPKG_DETECTED_CMAKE_${prog}_COMPILER_ID MATCHES "^(GNU|Intel)$"
+                    AND VCPKG_DETECTED_CMAKE_LINKER)
                     string(TOUPPER "MESON_${prog}_LD" var_to_set)
                     set(${var_to_set} "${proglower}_ld = ['${VCPKG_DETECTED_CMAKE_LINKER}']" PARENT_SCOPE)
                 endif()
@@ -189,13 +193,13 @@ function(z_vcpkg_get_build_and_host_system build_system host_system is_cross) #h
 
     set(build "[build_machine]\n") # Machine the build is performed on
     string(APPEND build "endian = 'little'\n")
-    if(WIN32)
+    if(CMAKE_HOST_WIN32)
         string(APPEND build "system = 'windows'\n")
-    elseif(DARWIN)
+    elseif(CMAKE_HOST_APPLE)
         string(APPEND build "system = 'darwin'\n")
     elseif(CYGWIN)
         string(APPEND build "system = 'cygwin'\n")
-    elseif(UNIX)
+    elseif(CMAKE_HOST_UNIX)
         string(APPEND build "system = 'linux'\n")
     else()
         set(build_unknown TRUE)
@@ -253,7 +257,7 @@ function(z_vcpkg_get_build_and_host_system build_system host_system is_cross) #h
 
     if(NOT build_cpu_fam MATCHES "${host_cpu_fam}"
        OR VCPKG_TARGET_IS_ANDROID OR VCPKG_TARGET_IS_IOS OR VCPKG_TARGET_IS_UWP
-       OR (VCPKG_TARGET_IS_MINGW AND NOT WIN32))
+       OR (VCPKG_TARGET_IS_MINGW AND NOT CMAKE_HOST_WIN32))
         set(${is_cross} TRUE PARENT_SCOPE)
     endif()
 endfunction()
