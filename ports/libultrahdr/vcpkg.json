@@ -1,6 +1,6 @@
 {
   "name": "libultrahdr",
-  "version-string": "2024.07.19",
+  "version-string": "2024.07.29",
   "port-version": 0,
   "description": "JPEG Ultra HDR",
   "homepage": "https://github.com/google/libultrahdr",
