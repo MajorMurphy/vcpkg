@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO google/libultrahdr
-    REF 201ce6bee20b755ae10a51c5852ef4e3e13ab1a9
-    SHA512 d956efcc0f2e7f1981d9af9441d3673f2855605092ebb8af95b049b7ca0ebdbbdcfe0025e2ca530f770b1ab61f23735662a005fd06784fcfceffc5bd974f41d5
+    REF ea72bc86130eca7699abe689ccbeb4135266dbc5
+    SHA512 60979a4afccd8fd06f226d46107d5508d07d73523dd21e825bfdd2efcd6fb9023d39e611ffe8d9d9af4668b731ddf60e12447f24b23ac1226fedece957354682
     HEAD_REF master
 )
 vcpkg_cmake_configure(
